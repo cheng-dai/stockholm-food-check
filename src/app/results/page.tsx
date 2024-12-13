@@ -20,6 +20,7 @@ function Results() {
     updateLoading(true);
     async function fetchData() {
       if (!search) return;
+
       const returnedRestaurants = await getInspections(search);
 
       const newRestaurants: Restaurant[] = await Promise.all(
@@ -45,7 +46,7 @@ function Results() {
   }, [search]);
 
   return (
-    <div className="md:w-1/2 aspect-square md:aspect-[1.2/1] relative mx-auto">
+    <div className="w-full md:w-1/2 aspect-square md:aspect-[1.2/1] relative mx-auto">
       <Map />
       {loading && (
         <div className="flex justify-center items-center w-full h-full z-50 absolute top-0 left-0 right-0 bottom-0 bg-white/50 rounded-lg">

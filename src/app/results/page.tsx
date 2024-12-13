@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { getInspections } from "../lib/actions";
 import { getGeoInfo } from "../utils/helper";
 import { Restaurant } from "../lib/types";
@@ -40,15 +40,17 @@ export default function Search() {
     fetchData();
   }, [search]);
   return (
-    <div className="mt-20">
-      <div className="md:w-1/2 aspect-square md:aspect-[1.2/1] relative mx-auto">
-        <Map />
-        {loading && (
-          <div className="flex justify-center items-center w-full h-full z-50 absolute top-0 left-0 right-0 bottom-0 bg-white/50 rounded-lg">
-            <p className="text-xl font-bold">Loading...</p>
-          </div>
-        )}
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className="mt-20">
+        <div className="md:w-1/2 aspect-square md:aspect-[1.2/1] relative mx-auto">
+          <Map />
+          {loading && (
+            <div className="flex justify-center items-center w-full h-full z-50 absolute top-0 left-0 right-0 bottom-0 bg-white/50 rounded-lg">
+              <p className="text-xl font-bold">Loading...</p>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </Suspense>
   );
 }

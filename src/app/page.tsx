@@ -2,8 +2,15 @@
 import Map from "./components/Map";
 import Search from "./components/Search";
 import { useRestaurantsStore } from "./lib/store";
+import { useEffect } from "react";
 export default function Home() {
   const loading = useRestaurantsStore((state) => state.loading);
+  const updateRestaurants = useRestaurantsStore(
+    (state) => state.setRestaurants
+  );
+  useEffect(() => {
+    updateRestaurants([]);
+  }, []);
 
   return (
     <div>

@@ -14,6 +14,9 @@ export default function Home() {
 
   return (
     <div>
+      <p className="text-center italic text-sm mb-4">
+        "We deserve better food."
+      </p>
       <Search />
       <div className="md:w-1/2 aspect-square md:aspect-[1.2/1] relative mx-auto">
         <Map />

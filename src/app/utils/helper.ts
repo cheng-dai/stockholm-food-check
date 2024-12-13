@@ -19,6 +19,6 @@ export async function getGeoInfo(restaurant: Restaurant) {
     return geoInfo.json();
   } catch (error) {
     console.error(error);
-    return null;
+    return "failed";
   }
 }

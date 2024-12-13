@@ -1,10 +1,8 @@
 "use client";
 import Map from "./components/Map";
 import Search from "./components/Search";
-import Card from "./components/Card";
 import { useRestaurantsStore } from "./lib/store";
 export default function Home() {
-  const showCard = useRestaurantsStore((state) => state.showCard);
   const loading = useRestaurantsStore((state) => state.loading);
 
   return (

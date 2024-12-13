@@ -1,5 +1,5 @@
 "use client";
-import { Map as MapGL, Popup } from "react-map-gl/maplibre";
+import { Map as MapGL } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useEffect, useState } from "react";
 import { useRestaurantsStore } from "../lib/store";

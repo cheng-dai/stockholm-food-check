@@ -1,23 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
-import { getInspections } from "../lib/actions";
-import { useRestaurantsStore } from "../lib/store";
-import { Restaurant } from "../lib/types";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 export default function Search() {
   const [search, setSearch] = useState("");
   const router = useRouter();
 
-  const restaurants = useRestaurantsStore((state) => state.restaurants);
-  const updateRestaurants = useRestaurantsStore((state) => state.restaurants);
-  const updateShowCard = useRestaurantsStore((state) => state.setShowCard);
-  const setRestaurants = useRestaurantsStore((state) => state.setRestaurants);
-  const updateLoading = useRestaurantsStore((state) => state.setLoading);
-
   const handelSearch = () => {
     router.push(`/results?q=${search}`);
   };
-  console.log(restaurants, "restaurants out of handelSearch");
+
   return (
     <div className="flex justify-center items-center mb-4 md:mb-8">
       <input

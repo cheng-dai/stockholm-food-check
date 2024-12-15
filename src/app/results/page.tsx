@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 import { getInspections } from "../lib/actions";
 import { getGeoInfo } from "../utils/helper";
 import { Restaurant } from "../lib/types";

@@ -6,7 +6,7 @@ import { useRestaurantsStore } from "../lib/store";
 import { Marker } from "react-map-gl/maplibre";
 import { SadFace, SmileFace, Question } from "./icons";
 import { passedMostRecentInspection } from "../utils/helper";
-// import { Restaurant } from "../lib/types";
+
 import MapPopup from "./MapPopup";
 
 const LIGHT_STYLE =
@@ -29,7 +29,6 @@ export default function Map() {
     longitude: 18.06324,
     zoom: 12,
   });
-  // const popupRef = useRef<HTMLDivElement>(null);
 
   const getMapBounds = () => {
     if (restaurants.length === 0) {

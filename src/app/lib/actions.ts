@@ -23,6 +23,12 @@ export async function getInspections(search: string) {
     }
   );
   const data = await inspections.json();
+  if (data.length === 0) {
+    return {
+      error:
+        "No results found, please try searching for a different restaurant",
+    };
+  }
   if (data.length > 5) {
     return {
       error: "Too many results, please narrow your search",

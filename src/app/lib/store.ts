@@ -6,6 +6,7 @@ type State = {
   showCard: boolean;
   restaurants: Restaurant[];
   selectedRestaurant: Restaurant | null;
+  error: string | null;
 };
 
 type Actions = {
@@ -13,9 +14,11 @@ type Actions = {
   setSelectedRestaurant: (restaurant: Restaurant | null) => void;
   setShowCard: (showCard: boolean) => void;
   setRestaurants: (restaurants: Restaurant[]) => void;
+  setError: (error: string | null) => void;
 };
 
 export const useRestaurantsStore = create<State & Actions>((set) => ({
+  error: null,
   loading: false,
   showCard: false,
   restaurants: [],
@@ -25,4 +28,5 @@ export const useRestaurantsStore = create<State & Actions>((set) => ({
     set({ selectedRestaurant }),
   setShowCard: (showCard: boolean) => set({ showCard }),
   setRestaurants: (restaurants: Restaurant[]) => set({ restaurants }),
+  setError: (error: string | null) => set({ error }),
 }));

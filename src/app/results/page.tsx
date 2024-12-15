@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { getInspections } from "../lib/actions";
 import { getGeoInfo } from "../utils/helper";
 import { Restaurant } from "../lib/types";
@@ -15,6 +15,8 @@ function Results() {
   const updateLoading = useRestaurantsStore((state) => state.setLoading);
   const setRestaurants = useRestaurantsStore((state) => state.setRestaurants);
   const updateShowCard = useRestaurantsStore((state) => state.setShowCard);
+
+  const setError = useRestaurantsStore((state) => state.setError);
   useEffect(() => {
     console.log(search);
     updateLoading(true);
@@ -22,6 +24,10 @@ function Results() {
       if (!search) return;
 
       const returnedRestaurants = await getInspections(search);
+      if (returnedRestaurants.error) {
+        setError(returnedRestaurants.error);
+        return;
+      }
 
       const newRestaurants: Restaurant[] = await Promise.all(
         returnedRestaurants.map(async (restaurant: Restaurant) => {
@@ -57,6 +63,8 @@ function Results() {
   );
 }
 export default function Search() {
+  const error = useRestaurantsStore((state) => state.error);
+
   return (
     <div className=" flex flex-col items-center">
       <Link href="/" className="mb-4">
@@ -64,9 +72,15 @@ export default function Search() {
           Back to Search
         </button>
       </Link>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Results />
-      </Suspense>
+      {error ? (
+        <div className="text-red-500 text-center mb-4 italic text-lg font-bold mt-20">
+          {error}
+        </div>
+      ) : (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Results />
+        </Suspense>
+      )}
     </div>
   );
 }

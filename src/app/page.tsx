@@ -5,11 +5,15 @@ import { useRestaurantsStore } from "./lib/store";
 import { useEffect } from "react";
 export default function Home() {
   const loading = useRestaurantsStore((state) => state.loading);
+  const updateError = useRestaurantsStore((state) => state.setError);
+  const updateLoading = useRestaurantsStore((state) => state.setLoading);
   const updateRestaurants = useRestaurantsStore(
     (state) => state.setRestaurants
   );
   useEffect(() => {
+    updateError(null);
     updateRestaurants([]);
+    updateLoading(false);
   }, []);
 
   return (

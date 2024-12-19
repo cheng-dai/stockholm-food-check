@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Restaurant } from "./types";
 
-type State = {
+export type State = {
   loading: boolean;
   showCard: boolean;
   restaurants: Restaurant[];
@@ -17,7 +17,7 @@ type Actions = {
   setError: (error: string | null) => void;
 };
 
-export const useRestaurantsStore = create<State & Actions>((set) => ({
+export const useRestaurantsStore = create<State & Actions>()((set) => ({
   error: null,
   loading: false,
   showCard: false,

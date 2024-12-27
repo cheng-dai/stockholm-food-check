@@ -97,8 +97,6 @@ export default function Map() {
     setViewState(getMapBounds());
   }, [restaurants]);
 
-  console.log(restaurants);
-
   return (
     isMapReady && (
       <MapGL

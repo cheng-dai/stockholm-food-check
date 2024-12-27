@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "./components/Nav";
@@ -30,9 +30,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Nav />
-        {children}
-        <Analytics />
+        <div className="px-4">
+          <Nav />
+          {children}
+        </div>
+        <GoogleAnalytics gaId="G-9CGD79RZJP" />
       </body>
     </html>
   );

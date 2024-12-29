@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { getInspections } from "../lib/actions";
 import { getGeoInfo } from "../utils/helper";
 import { Restaurant } from "../lib/types";
@@ -84,7 +84,9 @@ export default function ResultsPage() {
           Back to Search
         </button>
       </Link>
-      <Results />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Results />
+      </Suspense>
     </div>
   );
 }

@@ -9,16 +9,17 @@ import { useRestaurantsStore } from "../lib/store";
 import Map from "../components/Map";
 import Link from "next/link";
 import Card from "../components/Card";
-export default function Results() {
+
+function Results() {
   const searchParams = useSearchParams();
   const search = searchParams.get("q");
-  const loading = useRestaurantsStore((state) => state.loading);
   const updateLoading = useRestaurantsStore((state) => state.setLoading);
   const setRestaurants = useRestaurantsStore((state) => state.setRestaurants);
   const updateShowCard = useRestaurantsStore((state) => state.setShowCard);
   const restaurants = useRestaurantsStore((state) => state.restaurants);
   const setError = useRestaurantsStore((state) => state.setError);
   const error = useRestaurantsStore((state) => state.error);
+  const loading = useRestaurantsStore((state) => state.loading);
   useEffect(() => {
     console.log(search);
     updateLoading(true);
@@ -53,6 +54,7 @@ export default function Results() {
     }
     fetchData();
   }, [search]);
+
   if (loading) {
     return (
       <div>
@@ -60,7 +62,21 @@ export default function Results() {
       </div>
     );
   }
+  return error ? (
+    <div className="text-red-500 text-center mb-4 italic text-lg font-bold mt-20">
+      {error}
+    </div>
+  ) : (
+    <div className="w-full md:w-1/2 aspect-square md:aspect-[1.2/1] relative mx-auto">
+      <Map />
+      {restaurants.map((restaurant) => (
+        <Card key={restaurant.Name} restaurant={restaurant} />
+      ))}
+    </div>
+  );
+}
 
+export default function ResultsPage() {
   return (
     <div className=" flex flex-col items-center">
       <Link href="/" className="mb-4">
@@ -68,18 +84,7 @@ export default function Results() {
           Back to Search
         </button>
       </Link>
-      {error ? (
-        <div className="text-red-500 text-center mb-4 italic text-lg font-bold mt-20">
-          {error}
-        </div>
-      ) : (
-        <div className="w-full md:w-1/2 aspect-square md:aspect-[1.2/1] relative mx-auto">
-          <Map />
-          {restaurants.map((restaurant) => (
-            <Card key={restaurant.Name} restaurant={restaurant} />
-          ))}
-        </div>
-      )}
+      <Results />
     </div>
   );
 }

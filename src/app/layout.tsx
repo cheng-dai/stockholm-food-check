@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Stockholm Livsmedelsinspektioner",
-  description: "Stockholm Livsmedelsinspektioner",
+  title: "Stockholm food check",
+  description: "check if the food is safe to eat in stockholm",
 };
 
 export default function RootLayout({

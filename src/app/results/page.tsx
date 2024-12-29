@@ -8,15 +8,18 @@ import { Restaurant } from "../lib/types";
 import { useRestaurantsStore } from "../lib/store";
 import Map from "../components/Map";
 import Link from "next/link";
-function Results() {
+import Card from "../components/Card";
+export default function Results() {
   const searchParams = useSearchParams();
   const search = searchParams.get("q");
   const loading = useRestaurantsStore((state) => state.loading);
   const updateLoading = useRestaurantsStore((state) => state.setLoading);
   const setRestaurants = useRestaurantsStore((state) => state.setRestaurants);
   const updateShowCard = useRestaurantsStore((state) => state.setShowCard);
-
+  const showCard = useRestaurantsStore((state) => state.showCard);
+  const restaurants = useRestaurantsStore((state) => state.restaurants);
   const setError = useRestaurantsStore((state) => state.setError);
+  const error = useRestaurantsStore((state) => state.error);
   useEffect(() => {
     console.log(search);
     updateLoading(true);
@@ -45,25 +48,19 @@ function Results() {
         })
       );
       setRestaurants(newRestaurants);
+      console.log(newRestaurants);
       updateLoading(false);
       updateShowCard(true);
     }
     fetchData();
   }, [search]);
-
-  return (
-    <div className="w-full md:w-1/2 aspect-square md:aspect-[1.2/1] relative mx-auto">
-      <Map />
-      {loading && (
-        <div className="flex justify-center items-center w-full h-full z-50 absolute top-0 left-0 right-0 bottom-0 bg-white/50 rounded-lg">
-          <p className="text-xl font-bold">Loading...</p>
-        </div>
-      )}
-    </div>
-  );
-}
-export default function Search() {
-  const error = useRestaurantsStore((state) => state.error);
+  if (loading) {
+    return (
+      <div>
+        <p className="text-xl font-bold">Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className=" flex flex-col items-center">
@@ -77,9 +74,12 @@ export default function Search() {
           {error}
         </div>
       ) : (
-        <Suspense fallback={<div>Loading...</div>}>
-          <Results />
-        </Suspense>
+        <div className="w-full md:w-1/2 aspect-square md:aspect-[1.2/1] relative mx-auto">
+          <Map />
+          {restaurants.map((restaurant) => (
+            <Card key={restaurant.Name} restaurant={restaurant} />
+          ))}
+        </div>
       )}
     </div>
   );

@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 import { Restaurant } from "../lib/types";
 
 export default function Card({ restaurant }: { restaurant: Restaurant }) {
-  const { setSelectedRestaurant } = useRestaurantsStore();
   function translateResult(result: string) {
     if (
       result ===

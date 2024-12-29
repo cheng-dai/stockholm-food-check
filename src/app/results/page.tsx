@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect } from "react";
+import { useEffect } from "react";
 import { getInspections } from "../lib/actions";
 import { getGeoInfo } from "../utils/helper";
 import { Restaurant } from "../lib/types";
@@ -16,7 +16,6 @@ export default function Results() {
   const updateLoading = useRestaurantsStore((state) => state.setLoading);
   const setRestaurants = useRestaurantsStore((state) => state.setRestaurants);
   const updateShowCard = useRestaurantsStore((state) => state.setShowCard);
-  const showCard = useRestaurantsStore((state) => state.showCard);
   const restaurants = useRestaurantsStore((state) => state.restaurants);
   const setError = useRestaurantsStore((state) => state.setError);
   const error = useRestaurantsStore((state) => state.error);

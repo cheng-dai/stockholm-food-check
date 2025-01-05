@@ -20,18 +20,18 @@ function Results() {
   const setError = useRestaurantsStore((state) => state.setError);
   const error = useRestaurantsStore((state) => state.error);
   const loading = useRestaurantsStore((state) => state.loading);
+
   useEffect(() => {
-    console.log(search);
-    updateLoading(true);
-    async function fetchData() {
+    (async function () {
       if (!search) return;
 
       const returnedRestaurants = await getInspections(search);
       if (returnedRestaurants.error) {
+        updateLoading(false);
         setError(returnedRestaurants.error);
         return;
       }
-
+      console.log(returnedRestaurants, "returnedRestaurants");
       const newRestaurants: Restaurant[] = await Promise.all(
         returnedRestaurants.map(async (restaurant: Restaurant) => {
           const [locationData] = await getGeoInfo(restaurant);
@@ -51,9 +51,8 @@ function Results() {
       console.log(newRestaurants);
       updateLoading(false);
       updateShowCard(true);
-    }
-    fetchData();
-  }, [search]);
+    })();
+  }, [search, setRestaurants, updateLoading, updateShowCard, setError]);
 
   if (loading) {
     return (

@@ -23,6 +23,7 @@ export async function getInspections(search: string) {
     }
   );
   const data = await inspections.json();
+  console.log(data);
   if (data.length === 0) {
     return {
       error:

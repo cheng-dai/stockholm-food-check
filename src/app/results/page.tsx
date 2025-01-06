@@ -22,6 +22,7 @@ function Results() {
   const loading = useRestaurantsStore((state) => state.loading);
 
   useEffect(() => {
+    updateLoading(true);
     (async function () {
       if (!search) return;
 

@@ -2,12 +2,11 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { ToastContainer } from "react-toastify";
-import { useRestaurantsStore } from "../lib/store";
 
 export default function Search() {
   const [search, setSearch] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const updateLoading = useRestaurantsStore((state) => state.setLoading);
+
   const router = useRouter();
 
   const handleSearch = () => {
@@ -19,7 +18,7 @@ export default function Search() {
       }
       return;
     }
-    updateLoading(true);
+
     router.push(`/results?q=${search}`);
   };
 
@@ -28,6 +27,9 @@ export default function Search() {
       <input
         ref={inputRef}
         required
+        onKeyDown={(e) => {
+          if (e.key === "Enter") handleSearch();
+        }}
         onChange={(e) => setSearch(e.target.value)}
         type="text"
         placeholder="Search a restaurant"

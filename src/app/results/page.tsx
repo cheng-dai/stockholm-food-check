@@ -67,11 +67,18 @@ function Results() {
       {error}
     </div>
   ) : (
-    <div className="w-full md:w-1/2 aspect-square md:aspect-[1.2/1] relative mx-auto">
-      <Map />
-      {restaurants.map((restaurant) => (
-        <Card key={restaurant.Name} restaurant={restaurant} />
-      ))}
+    <div className="flex w-full md:w-1/2 relative mx-auto flex-col md:flex-row gap-8">
+      <div className="aspect-square w-1/2">
+        <Map />
+      </div>
+      <div className="">
+        <h2 className="text-2xl text-center mb-6 ">Results</h2>
+        <div className="border-2 border-gray-200 rounded-md p-4 w-full overflow-y-auto">
+          {restaurants.map((restaurant) => (
+            <Card key={restaurant.Name} restaurant={restaurant} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -71,7 +71,7 @@ function Results() {
       <div className="aspect-square w-1/2">
         <Map />
       </div>
-      <div className="">
+      <div>
         <h2 className="text-2xl text-center mb-6 ">Results</h2>
         <div className="border-2 border-gray-200 rounded-md p-4 w-full overflow-y-auto">
           {restaurants.map((restaurant) => (

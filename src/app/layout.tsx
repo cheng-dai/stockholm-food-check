@@ -1,19 +1,8 @@
 import type { Metadata } from "next";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import localFont from "next/font/local";
+import { manRope } from "./fonts/fonts";
 import "./globals.css";
 import Nav from "./components/Nav";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
   title: "Stockholm food check",
@@ -28,12 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${manRope.className} antialiased p-4 px-6 md:p-10 md:px-20`}
       >
-        <div className="px-4">
-          <Nav />
-          {children}
-        </div>
+        <Nav />
+        {children}
         <GoogleAnalytics gaId="G-9CGD79RZJP" />
       </body>
     </html>

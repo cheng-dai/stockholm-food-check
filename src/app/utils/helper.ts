@@ -14,7 +14,7 @@ export function passedMostRecentInspection(restaurant: Restaurant) {
 export async function getGeoInfo(restaurant: Restaurant) {
   try {
     const geoInfo = await fetch(
-      `https://nominatim.openstreetmap.org/search.php?q=${restaurant.Address}&format=jsonv2`
+      `https://nominatim.openstreetmap.org/search?q=${restaurant.Address}&format=jsonv2`
     );
     return geoInfo.json();
   } catch (error) {

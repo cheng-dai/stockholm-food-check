@@ -1,6 +1,7 @@
 "use server";
 
 export async function getInspections(search: string) {
+  console.log("search in action", search);
   const inspections = await fetch(
     "https://etjanster.stockholm.se/Livsmedelsinspektioner/Livsmedelsinspektioner/SearchFacilitiesMap",
     {

@@ -1,6 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRef } from "react";
 import { ToastContainer } from "react-toastify";
 import { useRestaurantsStore } from "../lib/store";
 export default function Search() {
@@ -15,9 +14,11 @@ export default function Search() {
           ref={inputRef}
           required
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              (e.target as HTMLInputElement).value.trim() !== "" &&
-                search((e.target as HTMLInputElement).value);
+            if (
+              e.key === "Enter" &&
+              (e.target as HTMLInputElement).value.trim() !== ""
+            ) {
+              search((e.target as HTMLInputElement).value);
             }
           }}
           type="text"

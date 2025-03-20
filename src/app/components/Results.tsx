@@ -1,13 +1,8 @@
 "use client";
-import { useEffect } from "react";
-import { getInspections } from "../lib/actions";
-import { getGeoInfo } from "../utils/helper";
-import { Restaurant } from "../lib/types";
 import { useRestaurantsStore } from "../lib/store";
-import Card from "../components/Card";
 
 export function Results() {
-  const { restaurants, loading, showResults } = useRestaurantsStore();
+  const { loading, showResults } = useRestaurantsStore();
 
   if (loading) return <div>Loading...</div>;
   // if (restaurants.length === 0)

@@ -79,8 +79,12 @@ export const useRestaurantsStore = create<State & Actions>()((set, get) => ({
         loading: false,
         showResults: true,
       });
-    } catch (error: any) {
-      set({ error: error.message, loading: false });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        set({ error: error.message, loading: false });
+      } else {
+        set({ error: "An unknown error occurred", loading: false });
+      }
     }
   },
 }));

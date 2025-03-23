@@ -1,5 +1,6 @@
 "use client";
 import { useRestaurantsStore } from "../lib/store";
+import Card from "./Card";
 
 export function Results() {
   const { loading, showResults, restaurants } = useRestaurantsStore();
@@ -11,13 +12,11 @@ export function Results() {
     );
   return (
     showResults && (
-      <div className="flex w-full md:w-1/2 relative mx-auto flex-col md:flex-row gap-8">
-        <div>
-          {/* <div className="border-2 border-gray-200 rounded-md p-4 w-full overflow-y-auto">
-            {restaurants.map((restaurant) => (
-              <Card key={restaurant.Name} restaurant={restaurant} />
-            ))}
-          </div> */}
+      <div className="flex w-full relative mx-auto flex-col md:flex-row gap-8">
+        <div className="w-full rounded-lg">
+          {restaurants.map((restaurant) => (
+            <Card key={restaurant.Name} restaurant={restaurant} />
+          ))}
         </div>
       </div>
     )

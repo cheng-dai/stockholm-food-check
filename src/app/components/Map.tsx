@@ -20,7 +20,6 @@ export default function Map() {
   const setSelectedRestaurant = useRestaurantsStore(
     (state) => state.setSelectedRestaurant
   );
-  const [isMapReady, setIsMapReady] = useState(false);
 
   const [viewState, setViewState] = useState({
     latitude: 59.334591,
@@ -79,7 +78,6 @@ export default function Map() {
       onMove={(evt) => setViewState(evt.viewState)}
       style={{ width: "100%", height: "100%", borderRadius: "8px" }}
       mapStyle={DARK_STYLE}
-      onLoad={() => setIsMapReady(true)}
     >
       {restaurants.length > 0 &&
         restaurants.map((restaurant) => (

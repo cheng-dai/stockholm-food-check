@@ -15,7 +15,7 @@ export default function Card({ restaurant }: { restaurant: Restaurant }) {
     }
   }
   return (
-    <div className="flex flex-col items-center justify-center rounded-lg p-4 bg-white/20 backdrop-blur-lg">
+    <div className="flex flex-col items-center justify-center rounded-lg p-4 ">
       <h2 className="md:text-lg font-bold text-center">{restaurant.Name}</h2>
       <p className="text-xs md:text-sm text-center">{restaurant.Address}</p>
       <a

@@ -5,7 +5,7 @@ import { useRestaurantsStore } from "../lib/store";
 export default function Search() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { search } = useRestaurantsStore();
-  console.log("render search component");
+  console.log('"render search component"');
   return (
     <div>
       <h2 className="mb-6 text-green-600">Check the food inspection results</h2>
@@ -26,11 +26,12 @@ export default function Search() {
           className="w-full px-4 py-2 rounded-full shadow-md focus:outline-none focus:border-transparent bg-gray-800"
         />
         <button
-          onClick={() =>
-            inputRef.current &&
-            inputRef.current.value.trim() !== "" &&
-            search(inputRef.current.value)
-          }
+          onClick={(e) => {
+            e.preventDefault();
+            if (inputRef.current && inputRef.current.value.trim() !== "") {
+              search(inputRef.current.value);
+            }
+          }}
           className="text-white rounded-full shadow-md aspect-square p-2"
         >
           <svg

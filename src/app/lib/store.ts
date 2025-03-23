@@ -41,8 +41,8 @@ export const useRestaurantsStore = create<State & Actions>()((set, get) => ({
   setSearchTerm: (searchTerm: string) => set({ searchTerm }),
 
   search: (searchTerm: string) => {
-    if (get().searchTerm === searchTerm) return;
-    set({ searchTerm });
+    if (get().searchTerm.trim() === searchTerm.trim()) return;
+    set({ searchTerm: searchTerm.trim() });
     get().fetchRestaurants();
   },
 

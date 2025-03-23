@@ -6,12 +6,13 @@ import { useRestaurantsStore } from "./lib/store";
 
 export default function Home() {
   const loading = useRestaurantsStore((state) => state.loading);
+  const searchTerm = useRestaurantsStore((state) => state.searchTerm);
 
   return (
     <div className="flex flex-col md:flex-row mt-20 gap-10 md:align-top md:gap-40">
       <div className="flex-1 flex flex-col gap-4">
         <Search />
-        {!loading && <Results />}
+        {searchTerm && <Results />}
       </div>
 
       <div className="w-full md:w-[40%] aspect-square relative mx-auto">

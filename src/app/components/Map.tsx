@@ -98,9 +98,9 @@ export default function Map() {
               ) : (
                 <Question />
               )}
-              {selectedRestaurant?.Id === restaurant.Id && (
+              {/* {selectedRestaurant?.Id === restaurant.Id && (
                 <MapPopup restaurant={restaurant} />
-              )}
+              )} */}
             </Marker>
           </div>
         ))}

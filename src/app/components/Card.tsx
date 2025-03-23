@@ -7,17 +7,18 @@ export default function Card({ restaurant }: { restaurant: Restaurant }) {
       result ===
       "Vid den senaste inspektionen konstaterades inga avvikelser i de områden vi kontrollerade"
     ) {
-      return <div className="h-4 w-4 rounded-full bg-green-500"></div>;
+      return <div className="h-4 w-4 rounded-full bg-green-500/80"></div>;
     } else if (result === "Vid inspektionen konstaterades avvikelser") {
-      return <div className="h-4 w-4 rounded-full bg-red-500"></div>;
+      return <div className="h-4 w-4 rounded-full bg-red-500/80"></div>;
     } else {
-      return <div className="h-4 w-4 rounded-full bg-yellow-500"></div>;
+      return <div className="h-4 w-4 rounded-full bg-yellow-500/80"></div>;
     }
   }
   return (
     <div className="flex flex-col items-start justify-center rounded-xl p-4 border border-gray-600/30">
       <div className="flex justify-between items-center gap-2 w-full">
         <h2 className="md:text-lg font-bold text-center">{restaurant.Name}</h2>
+        {/* TODO: add collection function */}
         {/* <div className="flex items-center gap-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -33,15 +34,15 @@ export default function Card({ restaurant }: { restaurant: Restaurant }) {
           <p className="text-xs">(coming soon)</p>
         </div> */}
       </div>
-      {/* divider */}
-      <div className="w-1/4 h-0.5 bg-gray-600/50 my-2"></div>
-      <div className="flex justify-between items-center gap-2">
-        <p className="text-xs md:text-sm text-center">{restaurant.Address}</p>
+      <div className="flex justify-between items-center">
         <a
           href={`https://www.google.com/maps/search/?api=1&query=${restaurant.Name}`}
           target="_blank"
           rel="noopener noreferrer"
+          className="flex items-center gap-2"
         >
+          <p className="text-xs md:text-sm underline">{restaurant.Address}</p>
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="1.5em"
@@ -56,11 +57,10 @@ export default function Card({ restaurant }: { restaurant: Restaurant }) {
           </svg>
         </a>
       </div>
-      <div className="w-1/4 h-0.5 bg-gray-600/50 my-2"></div>
-      <p className="font-bold my-4">Inspection results</p>
+      <p className="font-bold mt-4 mb-2">Inspection results</p>
       {restaurant.InspectionList.length === 0 ? (
-        <p className="text-sm text-center font-bold mt-2">
-          No Inspection Results
+        <p className="font-mono mt-2 text-balance">
+          No inspection results found. This might be a new restaurant.
         </p>
       ) : (
         <div className="flex flex-col gap-2">
@@ -70,9 +70,8 @@ export default function Card({ restaurant }: { restaurant: Restaurant }) {
               key={uuidv4()}
             >
               <p className="text-sm font-mono">{inspection.InspectionDate}</p>
-              <p className={` ${translateResult(inspection.SummaryText)}`}>
-                {translateResult(inspection.SummaryText)}
-              </p>
+
+              {translateResult(inspection.SummaryText)}
             </div>
           ))}
         </div>

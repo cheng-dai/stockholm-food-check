@@ -7,16 +7,11 @@ import { Marker } from "react-map-gl/maplibre";
 import { SadFace, SmileFace, Question } from "./icons";
 import { passedMostRecentInspection } from "../utils/helper";
 
-import MapPopup from "./MapPopup";
-
 const DARK_STYLE =
   "https://api.protomaps.com/styles/v2/black.json?key=751d67441e149bdf";
 
 export default function Map() {
   const restaurants = useRestaurantsStore((state) => state.restaurants);
-  const selectedRestaurant = useRestaurantsStore(
-    (state) => state.selectedRestaurant
-  );
   const setSelectedRestaurant = useRestaurantsStore(
     (state) => state.setSelectedRestaurant
   );
@@ -98,9 +93,6 @@ export default function Map() {
               ) : (
                 <Question />
               )}
-              {/* {selectedRestaurant?.Id === restaurant.Id && (
-                <MapPopup restaurant={restaurant} />
-              )} */}
             </Marker>
           </div>
         ))}

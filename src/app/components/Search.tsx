@@ -9,7 +9,7 @@ export default function Search() {
   return (
     <div>
       <h2 className="mb-6 text-green-600">Check the food inspection results</h2>
-      <div className="flex justify-center items-center border border-gray-300 mb-4 md:mb-8 w-full rounded-full dark:bg-gray-800">
+      <div className="flex justify-center items-center border border-gray-300 mb-4 md:mb-8 w-full rounded-full bg-gray-800">
         <input
           ref={inputRef}
           required
@@ -23,7 +23,7 @@ export default function Search() {
           }}
           type="text"
           placeholder="Search a restaurant"
-          className="w-full px-4 py-2 rounded-full shadow-md focus:outline-none focus:border-transparent dark:bg-gray-800"
+          className="w-full px-4 py-2 rounded-full shadow-md focus:outline-none focus:border-transparent bg-gray-800"
         />
         <button
           onClick={() =>

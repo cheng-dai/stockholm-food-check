@@ -9,8 +9,6 @@ import { passedMostRecentInspection } from "../utils/helper";
 
 import MapPopup from "./MapPopup";
 
-const LIGHT_STYLE =
-  "https://api.protomaps.com/styles/v2/white.json?key=751d67441e149bdf";
 const DARK_STYLE =
   "https://api.protomaps.com/styles/v2/black.json?key=751d67441e149bdf";
 
@@ -23,7 +21,7 @@ export default function Map() {
     (state) => state.setSelectedRestaurant
   );
   const [isMapReady, setIsMapReady] = useState(false);
-  const [mapStyle, setMapStyle] = useState(LIGHT_STYLE);
+
   const [viewState, setViewState] = useState({
     latitude: 59.334591,
     longitude: 18.06324,
@@ -72,65 +70,42 @@ export default function Map() {
   };
 
   useEffect(() => {
-    const darkModeMediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
-
-    const updateMapStyle = (e: MediaQueryListEvent | MediaQueryList) => {
-      if (e.matches) {
-        setMapStyle(DARK_STYLE);
-      } else {
-        setMapStyle(LIGHT_STYLE);
-      }
-    };
-
-    // Set initial style
-    updateMapStyle(darkModeMediaQuery);
-    setIsMapReady(true);
-
-    darkModeMediaQuery.addEventListener("change", (e) => updateMapStyle(e));
-    return () =>
-      darkModeMediaQuery.removeEventListener("change", updateMapStyle);
-  }, []);
-
-  useEffect(() => {
     setViewState(getMapBounds());
   }, [restaurants]);
 
   return (
-    isMapReady && (
-      <MapGL
-        {...viewState}
-        onMove={(evt) => setViewState(evt.viewState)}
-        style={{ width: "100%", height: "100%", borderRadius: "8px" }}
-        mapStyle={mapStyle}
-      >
-        {restaurants.length > 0 &&
-          restaurants.map((restaurant) => (
-            <div key={restaurant.Id}>
-              <Marker
-                latitude={Number(restaurant.lat)}
-                longitude={Number(restaurant.lon)}
-                onClick={(e) => {
-                  e.originalEvent.stopPropagation();
-                  setSelectedRestaurant(restaurant);
-                }}
-                className="cursor-pointer"
-              >
-                {passedMostRecentInspection(restaurant) === "yes" ? (
-                  <SmileFace />
-                ) : passedMostRecentInspection(restaurant) === "no" ? (
-                  <SadFace />
-                ) : (
-                  <Question />
-                )}
-                {selectedRestaurant?.Id === restaurant.Id && (
-                  <MapPopup restaurant={restaurant} />
-                )}
-              </Marker>
-            </div>
-          ))}
-      </MapGL>
-    )
+    <MapGL
+      {...viewState}
+      onMove={(evt) => setViewState(evt.viewState)}
+      style={{ width: "100%", height: "100%", borderRadius: "8px" }}
+      mapStyle={DARK_STYLE}
+      onLoad={() => setIsMapReady(true)}
+    >
+      {restaurants.length > 0 &&
+        restaurants.map((restaurant) => (
+          <div key={restaurant.Id}>
+            <Marker
+              latitude={Number(restaurant.lat)}
+              longitude={Number(restaurant.lon)}
+              onClick={(e) => {
+                e.originalEvent.stopPropagation();
+                setSelectedRestaurant(restaurant);
+              }}
+              className="cursor-pointer"
+            >
+              {passedMostRecentInspection(restaurant) === "yes" ? (
+                <SmileFace />
+              ) : passedMostRecentInspection(restaurant) === "no" ? (
+                <SadFace />
+              ) : (
+                <Question />
+              )}
+              {selectedRestaurant?.Id === restaurant.Id && (
+                <MapPopup restaurant={restaurant} />
+              )}
+            </Marker>
+          </div>
+        ))}
+    </MapGL>
   );
 }

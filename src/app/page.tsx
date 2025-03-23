@@ -17,7 +17,7 @@ export default function Home() {
       <div className="w-full md:w-[40%] aspect-square relative mx-auto">
         <Map />
         {loading && (
-          <div className="flex justify-center items-center w-full h-full z-50 absolute top-0 left-0 right-0 bottom-0 bg-white/50 rounded-lg">
+          <div className="flex justify-center items-center w-full h-full z-50 absolute top-0 left-0 right-0 bottom-0 backdrop-blur-lg rounded-lg">
             <p className="text-xl font-bold">Loading...</p>
           </div>
         )}

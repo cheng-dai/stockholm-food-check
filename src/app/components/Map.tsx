@@ -15,7 +15,6 @@ export default function Map() {
   const setSelectedRestaurant = useRestaurantsStore(
     (state) => state.setSelectedRestaurant
   );
-
   const [viewState, setViewState] = useState({
     latitude: 59.334591,
     longitude: 18.06324,

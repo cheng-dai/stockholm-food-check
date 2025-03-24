@@ -1,4 +1,5 @@
 "use client";
+import { AnimatePresence, motion } from "motion/react";
 import { useRestaurantsStore } from "../lib/store";
 import Card from "./Card";
 
@@ -62,14 +63,23 @@ export function Results() {
       <div className="text-center text-lg font-bold">No results found</div>
     );
   return (
-    showResults && (
-      <div className="flex w-full relative mx-auto flex-col md:flex-row gap-8">
-        <div className="w-full rounded-lg">
-          {restaurants.map((restaurant) => (
-            <Card key={restaurant.Name} restaurant={restaurant} />
-          ))}
-        </div>
-      </div>
-    )
+    <AnimatePresence>
+      {showResults && (
+        <motion.div
+          className="flex w-full relative mx-auto flex-col md:flex-row gap-8"
+          key={restaurants.length}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          exit={{ opacity: 0, y: -10 }}
+        >
+          <div className="w-full rounded-lg">
+            {restaurants.map((restaurant) => (
+              <Card key={restaurant.Name} restaurant={restaurant} />
+            ))}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

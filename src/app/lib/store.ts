@@ -30,7 +30,6 @@ export const useRestaurantsStore = create<State & Actions>()((set, get) => ({
   restaurants: [],
   selectedRestaurant: null,
   searchTerm: "",
-
   setLoading: (loading: boolean) => set({ loading }),
   setSelectedRestaurant: (selectedRestaurant: Restaurant | null) =>
     set({ selectedRestaurant }),

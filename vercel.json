@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/restaurants?secret=your-secret-here",
+      "schedule": "0 0 * * 0"
+    }
+  ]
+}

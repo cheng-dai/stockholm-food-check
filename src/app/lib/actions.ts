@@ -1,7 +1,6 @@
 "use server";
 
 export async function getInspections(search: string) {
-  console.log("search in action", search);
   const inspections = await fetch(
     "https://etjanster.stockholm.se/Livsmedelsinspektioner/Livsmedelsinspektioner/SearchFacilitiesMap",
     {
@@ -21,21 +20,38 @@ export async function getInspections(search: string) {
         EastCoordinate: null,
         MaxDistanceAllowedFromPoint: null,
       }),
+      cache: "no-store",
     }
   );
-  const data = await inspections.json();
-  console.log(data);
-  if (data.length === 0) {
-    return {
-      error:
-        "No results found, please try searching for a different restaurant",
-    };
-  }
-  if (data.length > 5) {
-    return {
-      error: "Too many results, please narrow your search",
-    };
-  }
 
+  return inspections.json();
+}
+
+export async function fetchAllRestaurants() {
+  // Use the same API endpoint as your getInspections function but with an empty search
+  // to get all restaurants
+  const inspections = await fetch(
+    "https://etjanster.stockholm.se/Livsmedelsinspektioner/Livsmedelsinspektioner/SearchFacilitiesMap",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        FoodPlaceName: "",
+        FoodPlaceAddress: "",
+        FoodPlaceOrgNr: "",
+        NoDeficiency: false,
+        MinorDeficiency: false,
+        Revisit: false,
+        FacilityTypeGroups: [],
+        NorthCoordinate: null,
+        EastCoordinate: null,
+        MaxDistanceAllowedFromPoint: null,
+      }),
+    }
+  );
+
+  const data = await inspections.json();
   return data;
 }

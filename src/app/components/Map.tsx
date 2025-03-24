@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useRestaurantsStore } from "../lib/store";
 import { Marker } from "react-map-gl/maplibre";
 import { SadFace, SmileFace, Question } from "./icons";
-import { passedMostRecentInspection } from "../utils/helper";
+import { passedMostRecentInspection } from "../lib/helpers";
 
 const DARK_STYLE =
   "https://api.protomaps.com/styles/v2/black.json?key=751d67441e149bdf";

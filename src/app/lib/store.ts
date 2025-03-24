@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Restaurant } from "./types";
+import { getGeoInfo } from "./helpers";
 import { getInspections } from "./actions";
-import { getGeoInfo } from "../utils/helper";
 
 export type State = {
   loading: boolean;

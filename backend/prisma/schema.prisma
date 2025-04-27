@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/client"
+  moduleFormat = "esm" 
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Establishment {
+  id          Int          @id @default(autoincrement())
+  name        String
+  address     String
+  latitude    Float
+  longitude   Float
+  inspections Inspection[]
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  @@index([name, address])
+  @@map("establishments")
+}
+
+model Inspection {
+  id              Int           @id @default(autoincrement())
+  date            DateTime
+  result          String
+  establishment   Establishment @relation(fields: [establishmentId], references: [id])
+  establishmentId Int           @map("establishment_id")
+  violations      Violation[]
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  @@index([establishmentId])
+  @@map("inspections")
+}
+
+model Violation {
+  id           Int        @id @default(autoincrement())
+  code         String
+  description  String     @db.Text
+  points       Int
+  inspection   Inspection @relation(fields: [inspectionId], references: [id])
+  inspectionId Int        @map("inspection_id")
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  @@index([inspectionId])
+  @@map("violations")
+} 

@@ -1,0 +1,30 @@
+{
+  "name": "stockholm-food-check-backend",
+  "version": "1.0.0",
+  "description": "Backend for Stockholm Food Check",
+  "main": "src/server.ts",
+  "scripts": {
+    "dev": "nodemon src/server.ts",
+    "build": "tsc",
+    "start": "node src/server.ts",
+    "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.12.0",
+    "@graphql-tools/graphql-file-loader": "^8.0.19",
+    "@graphql-tools/load": "^8.1.0",
+    "@graphql-tools/schema": "^10.0.23",
+    "@prisma/client": "^6.6.0",
+    "graphql": "^16.11.0"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^5.0.5",
+    "@graphql-codegen/typescript": "^4.1.6",
+    "@graphql-codegen/typescript-resolvers": "^4.5.0",
+    "@types/node": "^20.17.31",
+    "nodemon": "^3.1.10",
+    "prisma": "^6.6.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

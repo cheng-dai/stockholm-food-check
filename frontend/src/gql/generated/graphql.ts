@@ -1,5 +1,4 @@
 /* eslint-disable */
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -43,12 +42,17 @@ export type Query = {
   __typename?: 'Query';
   establishment?: Maybe<Establishment>;
   establishments: Array<Establishment>;
-  test?: Maybe<Test>;
+  establishmentsBySearchTerm: Array<Establishment>;
 };
 
 
 export type QueryEstablishmentArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type QueryEstablishmentsBySearchTermArgs = {
+  searchTerm: Scalars['String']['input'];
 };
 
 export type Test = {
@@ -66,11 +70,3 @@ export type Violation = {
   points: Scalars['Int']['output'];
   updatedAt: Scalars['String']['output'];
 };
-
-export type GetEstablishmentsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetEstablishmentsQuery = { __typename?: 'Query', establishments: Array<{ __typename?: 'Establishment', id: number, name: string, address: string, latitude: number, longitude: number }> };
-
-
-export const GetEstablishmentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetEstablishments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"establishments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}}]}}]}}]} as unknown as DocumentNode<GetEstablishmentsQuery, GetEstablishmentsQueryVariables>;

@@ -9,7 +9,6 @@ export default function Search() {
   console.log('"render search component"');
   return (
     <div>
-      <h2 className="mb-6 text-green-600">Check the food inspection results</h2>
       <div className="flex justify-center items-center border border-gray-300 mb-4 md:mb-8 w-full rounded-full bg-gray-800">
         <input
           ref={inputRef}

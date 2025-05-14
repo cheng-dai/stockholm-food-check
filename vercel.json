@@ -1,8 +1,39 @@
 {
-  "crons": [
+  "version": 2,
+  "builds": [
     {
-      "path": "/api/cron/restaurants?secret=your-secret-here",
-      "schedule": "0 0 * * 0"
+      "src": "frontend/package.json",
+      "use": "@vercel/next"
+    },
+    {
+      "src": "backend/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "prisma/schema.prisma",
+          "prisma/migrations/**",
+          "../../schema.graphql"
+        ],
+        "buildCommand": "cd backend && pnpm install --prod=false && pnpm prisma generate && pnpm build && if [ -f ../../schema.graphql ]; then cp ../../schema.graphql dist/schema.graphql; fi"
+      }
     }
-  ]
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:match*",
+      "destination": "/api/:match*"
+    }
+  ],
+  "functions": {
+    "backend/api/**/*.ts": {
+      "runtime": "nodejs18.x",
+      "memory": 1024,
+      "maxDuration": 10,
+      "includeFiles": [
+        "backend/dist/**",
+        "prisma/**",
+        "node_modules/.prisma/client/**"
+      ]
+    }
+  }
 }

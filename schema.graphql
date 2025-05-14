@@ -33,6 +33,6 @@ type Test {
 
 type Query {
   establishments: [Establishment!]!
+  establishmentsBySearchTerm(searchTerm: String!): [Establishment!]!
   establishment(id: Int!): Establishment
-  test: Test
 }

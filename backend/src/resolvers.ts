@@ -21,6 +21,13 @@ export const resolvers: Resolvers = {
       });
       return results.map(formatDates);
     },
+    establishmentsBySearchTerm: async (_, args: { searchTerm: string }) => {
+      const results = await prisma.establishment.findMany({
+        where: { name: { contains: args.searchTerm } },
+        include: { inspections: true },
+      });
+      return results.map(formatDates);
+    },
     establishment: async (_, args: { id: number }) => {
       const result = await prisma.establishment.findUnique({
         where: { id: args.id },

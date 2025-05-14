@@ -43,12 +43,17 @@ export type Query = {
   __typename?: 'Query';
   establishment?: Maybe<Establishment>;
   establishments: Array<Establishment>;
-  test?: Maybe<Test>;
+  establishmentsBySearchTerm: Array<Establishment>;
 };
 
 
 export type QueryEstablishmentArgs = {
   id: Scalars['Int']['input'];
+};
+
+
+export type QueryEstablishmentsBySearchTermArgs = {
+  searchTerm: Scalars['String']['input'];
 };
 
 export type Test = {
@@ -188,7 +193,7 @@ export type InspectionResolvers<ContextType = any, ParentType extends ResolversP
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   establishment?: Resolver<Maybe<ResolversTypes['Establishment']>, ParentType, ContextType, RequireFields<QueryEstablishmentArgs, 'id'>>;
   establishments?: Resolver<Array<ResolversTypes['Establishment']>, ParentType, ContextType>;
-  test?: Resolver<Maybe<ResolversTypes['Test']>, ParentType, ContextType>;
+  establishmentsBySearchTerm?: Resolver<Array<ResolversTypes['Establishment']>, ParentType, ContextType, RequireFields<QueryEstablishmentsBySearchTermArgs, 'searchTerm'>>;
 };
 
 export type TestResolvers<ContextType = any, ParentType extends ResolversParentTypes['Test'] = ResolversParentTypes['Test']> = {

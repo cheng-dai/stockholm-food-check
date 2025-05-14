@@ -1,6 +1,9 @@
 "use server";
 
-export async function getInspections(search: string) {
+import { GET_ESTABLISHMENTS_BY_SEARCH_TERM } from "@/gql/queries";
+import { useQuery } from "@apollo/client";
+
+export async function getInspectionsUsingAPI(search: string) {
   const inspections = await fetch(
     "https://etjanster.stockholm.se/Livsmedelsinspektioner/Livsmedelsinspektioner/SearchFacilitiesMap",
     {
@@ -25,6 +28,16 @@ export async function getInspections(search: string) {
   );
 
   return inspections.json();
+}
+
+export async function getEstablishmentsBySearchTerm(searchTerm: string) {
+  const { data, error } = useQuery(GET_ESTABLISHMENTS_BY_SEARCH_TERM, {
+    variables: { searchTerm },
+  });
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
 }
 
 export async function fetchAllRestaurants() {

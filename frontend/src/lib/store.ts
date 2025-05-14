@@ -1,7 +1,8 @@
 import { create } from "zustand";
 import { Restaurant } from "./types";
 import { getGeoInfo } from "./helpers";
-import { getInspections } from "./actions";
+import { getEstablishmentsBySearchTerm } from "./actions";
+// import { getInspections } from "./actions";
 
 export type State = {
   loading: boolean;
@@ -51,7 +52,9 @@ export const useRestaurantsStore = create<State & Actions>()((set, get) => ({
 
     set({ loading: true, error: null });
     try {
-      const returnedRestaurants = await getInspections(searchTerm);
+      const returnedRestaurants = await getEstablishmentsBySearchTerm(
+        searchTerm
+      );
       if (returnedRestaurants.error) {
         set({ loading: false, error: returnedRestaurants.error });
         return;

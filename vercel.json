@@ -23,12 +23,5 @@
       "source": "/api/:match*",
       "destination": "/api/:match*"
     }
-  ],
-  "functions": {
-    "backend/api/**/*.ts": {
-      "runtime": "nodejs18.x",
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  }
+  ]
 }

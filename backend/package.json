@@ -14,7 +14,7 @@
     "@graphql-tools/graphql-file-loader": "^8.0.19",
     "@graphql-tools/load": "^8.1.0",
     "@graphql-tools/schema": "^10.0.23",
-    "@prisma/client": "^6.7.0",
+    "@prisma/client": "^6.8.2",
     "express": "^5.1.0",
     "graphql": "^16.11.0"
   },
@@ -22,10 +22,10 @@
     "@graphql-codegen/cli": "^5.0.6",
     "@graphql-codegen/typescript": "^4.1.6",
     "@graphql-codegen/typescript-resolvers": "^4.5.1",
-    "@types/express": "^5.0.1",
-    "@types/node": "^20.17.47",
+    "@types/express": "^5.0.2",
+    "@types/node": "^20.17.48",
     "nodemon": "^3.1.10",
-    "prisma": "^6.7.0",
+    "prisma": "^6.8.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

@@ -52,9 +52,8 @@ export const useRestaurantsStore = create<State & Actions>()((set, get) => ({
 
     set({ loading: true, error: null });
     try {
-      const returnedRestaurants = await getEstablishmentsBySearchTerm(
-        searchTerm
-      );
+      const returnedRestaurants =
+        await getEstablishmentsBySearchTerm(searchTerm);
       if (returnedRestaurants.error) {
         set({ loading: false, error: returnedRestaurants.error });
         return;
@@ -74,7 +73,7 @@ export const useRestaurantsStore = create<State & Actions>()((set, get) => ({
             lat,
             lon,
           };
-        })
+        }),
       );
       set({
         restaurants: restaurantsWithLocation,

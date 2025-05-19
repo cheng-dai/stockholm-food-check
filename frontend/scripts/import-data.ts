@@ -27,7 +27,7 @@ async function importData() {
     // Read the JSON file
     const rawData = fs.readFileSync(
       path.join(process.cwd(), "src", "data.json"),
-      "utf-8"
+      "utf-8",
     );
     const data = JSON.parse(rawData);
 
@@ -137,7 +137,7 @@ async function importData() {
         processed++;
         if (processed % 10 === 0) {
           console.log(
-            `Progress: ${processed} establishments, ${inspectionsCreated} inspections, ${violationsCreated} violations`
+            `Progress: ${processed} establishments, ${inspectionsCreated} inspections, ${violationsCreated} violations`,
           );
         }
       } catch (itemError) {
@@ -151,7 +151,7 @@ async function importData() {
       `Data import completed!\n` +
         `Processed ${processed} establishments\n` +
         `Created ${inspectionsCreated} inspections\n` +
-        `Created ${violationsCreated} violations`
+        `Created ${violationsCreated} violations`,
     );
   } catch (error) {
     console.error("Error importing data:", error);

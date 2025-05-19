@@ -46,9 +46,9 @@ export default function MapPopup({ restaurant }: { restaurant: Restaurant }) {
                   translateResult(inspection.SummaryText) === "Passed"
                     ? "text-green-500"
                     : translateResult(inspection.SummaryText) ===
-                      "Lack of results"
-                    ? "text-yellow-500"
-                    : "text-red-500"
+                        "Lack of results"
+                      ? "text-yellow-500"
+                      : "text-red-500"
                 }`}
               >
                 {translateResult(inspection.SummaryText)}

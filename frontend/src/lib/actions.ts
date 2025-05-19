@@ -1,7 +1,7 @@
 "use server";
 
 import { GET_ESTABLISHMENTS_BY_SEARCH_TERM } from "@/gql/queries";
-import { useQuery } from "@apollo/client";
+import { client } from "@/lib/apollo-provider";
 
 export async function getInspectionsUsingAPI(search: string) {
   const inspections = await fetch(
@@ -24,19 +24,17 @@ export async function getInspectionsUsingAPI(search: string) {
         MaxDistanceAllowedFromPoint: null,
       }),
       cache: "no-store",
-    }
+    },
   );
 
   return inspections.json();
 }
 
 export async function getEstablishmentsBySearchTerm(searchTerm: string) {
-  const { data, error } = useQuery(GET_ESTABLISHMENTS_BY_SEARCH_TERM, {
+  const { data } = await client.query({
+    query: GET_ESTABLISHMENTS_BY_SEARCH_TERM,
     variables: { searchTerm },
   });
-  if (error) {
-    throw new Error(error.message);
-  }
   return data;
 }
 
@@ -62,7 +60,7 @@ export async function fetchAllRestaurants() {
         EastCoordinate: null,
         MaxDistanceAllowedFromPoint: null,
       }),
-    }
+    },
   );
 
   const data = await inspections.json();

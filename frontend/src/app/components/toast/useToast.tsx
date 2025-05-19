@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { ToastContainer } from "./ToastContainer";
 import { Toast } from "./types";
 export const useToast = (
-  containerRef: React.RefObject<ToastContainer | null>
+  containerRef: React.RefObject<ToastContainer | null>,
 ) => {
   const showToast = useCallback(
     (message: string, duration: number = 3000) => {
@@ -16,7 +16,7 @@ export const useToast = (
 
       containerRef.current.setToasts((prev) => [...prev, newToast]);
     },
-    [containerRef]
+    [containerRef],
   );
 
   return showToast;

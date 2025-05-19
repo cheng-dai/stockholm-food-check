@@ -13,7 +13,7 @@ const DARK_STYLE =
 export default function Map() {
   const restaurants = useRestaurantsStore((state) => state.restaurants);
   const setSelectedRestaurant = useRestaurantsStore(
-    (state) => state.setSelectedRestaurant
+    (state) => state.setSelectedRestaurant,
   );
   const [viewState, setViewState] = useState({
     latitude: 59.334591,

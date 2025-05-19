@@ -4,7 +4,7 @@ import Map from "./components/Map";
 import { Results } from "./components/Results";
 import Search from "./components/Search";
 import { useRestaurantsStore } from "../lib/store";
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { GET_ESTABLISHMENTS } from "../gql/queries";
 export default function Home() {
   const loading = useRestaurantsStore((state) => state.loading);

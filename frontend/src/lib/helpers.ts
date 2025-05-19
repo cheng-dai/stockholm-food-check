@@ -13,7 +13,7 @@ export async function fetchAndStoreAllRestaurants() {
     console.log(
       `Successfully fetched and stored ${
         restaurants.length
-      } restaurants at ${new Date().toISOString()}`
+      } restaurants at ${new Date().toISOString()}`,
     );
     return { success: true, count: restaurants.length };
   } catch (error) {
@@ -36,7 +36,7 @@ export function passedMostRecentInspection(restaurant: Restaurant) {
 export async function getGeoInfo(restaurant: Restaurant) {
   try {
     const geoInfo = await fetch(
-      `https://nominatim.openstreetmap.org/search?q=${restaurant.Address}&format=jsonv2`
+      `https://nominatim.openstreetmap.org/search?q=${restaurant.Address}&format=jsonv2`,
     );
     return geoInfo.json();
   } catch (error) {

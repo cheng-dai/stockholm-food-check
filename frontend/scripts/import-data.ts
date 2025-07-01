@@ -1,9 +1,9 @@
-import { prisma } from "../../backend/src/lib/prisma";
+import prisma from "../../backend/src/lib/prisma";
 import * as fs from "fs";
 import * as path from "path";
 
 // Helper function to parse float safely
-function parseFloatSafe(value: any): number {
+function parseFloatSafe(value: string): number {
   const parsed = parseFloat(value);
   return isNaN(parsed) ? 0 : parsed;
 }
@@ -13,7 +13,7 @@ function parseDateSafe(dateStr: string): Date {
   try {
     const date = new Date(dateStr);
     return isNaN(date.getTime()) ? new Date() : date;
-  } catch (error) {
+  } catch {
     console.error("Error parsing date:", dateStr);
     return new Date();
   }

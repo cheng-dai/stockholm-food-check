@@ -10,13 +10,37 @@ export default function Home() {
   const loading = useRestaurantsStore((state) => state.loading);
   const searchTerm = useRestaurantsStore((state) => state.searchTerm);
 
-  const { data, loading: loadingEstablishments } = useQuery(GET_ESTABLISHMENTS);
+  const {
+    data,
+    loading: loadingEstablishments,
+    error,
+  } = useQuery(GET_ESTABLISHMENTS);
   const establishments = data?.establishments;
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center mt-20">
+        <h2 className="text-red-600 mb-4">Error loading establishments</h2>
+        <p className="text-gray-600">{error.message}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col md:flex-row mt-20 gap-10 md:align-top md:gap-40">
-      {loadingEstablishments && <p>Loading...</p>}
+      {loadingEstablishments && (
+        <div className="flex-1 flex items-center justify-center">
+          <p className="text-xl">Loading establishments...</p>
+        </div>
+      )}
 
-      {establishments && establishments.length > 0 && (
+      {!loadingEstablishments && !establishments && (
+        <div className="flex-1 flex items-center justify-center">
+          <p className="text-xl text-gray-600">No establishments found</p>
+        </div>
+      )}
+
+      {establishments && (
         <LayoutGroup>
           <motion.div
             className="flex-1 flex flex-col gap-4"

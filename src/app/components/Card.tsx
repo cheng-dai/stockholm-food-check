@@ -64,7 +64,7 @@ export default function Card({ restaurant }: { restaurant: Restaurant }) {
         </p>
       ) : (
         <div className="flex flex-col gap-2">
-          {restaurant.InspectionList.slice(0, 5).map((inspection) => (
+          {restaurant.InspectionList.map((inspection) => (
             <div
               className="flex gap-4 items-center justify-between"
               key={uuidv4()}
